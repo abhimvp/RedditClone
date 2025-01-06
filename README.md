@@ -105,7 +105,12 @@ It will also create a convex/ folder for you to write your backend API functions
 - frontend : submitPage - done can see the data in databse.
 
 #### Uploading / Posting Image
+
 - upload images as part of our post.
   - select the image
   - preview the image
   - upload the image (the way it works is if the user is trying to submit the post).Then we grab the image we're going to generate a unique upload URL for that image in convex storage which is included in the backend.we're then going to upload that image to the URL.Then once the image is uploaded , we're going to take that image URL and store that in the post.
+
+#### Fetching / Getting Posts
+
+- now if we look at the post schema , we're just containing like reference to the ID's to the other tables.so what we're going to be doing is we're going to be looking at the subreddit id & we actually go to subreddit table , grab the name of the subreddit and then include that information that we returned back about the post.
