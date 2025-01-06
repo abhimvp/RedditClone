@@ -2,7 +2,7 @@ import "../styles/SubredditPage.css";
 import { useParams } from "react-router-dom";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { RetryScheduleInOut } from "svix";
+import PostCard from "../components/PostCard";
 
 const SubredditPage = () => {
   const { subredditName } = useParams();
@@ -31,9 +31,15 @@ const SubredditPage = () => {
         {subreddit.description && <p>{subreddit.description}</p>}
       </div>
       <div className="posts-container">
-        <div className="no-posts">
-          <p>No posts yet . be first to post</p>
-        </div>
+        {subreddit.posts?.length === 0 ? (
+          <div className="no-posts">
+            <p>No posts yet . be first to post</p>
+          </div>
+        ) : (
+          subreddit.posts.map((post) => (
+            <PostCard key={post._id} post={post} showSubreddit={false} />
+          ))
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { mutation, query } from "./_generated/server";
 import { getCurrentUserOrThrow } from "./users";
 import { v, ConvexError } from "convex/values";
+import { getEnrichedPosts } from "./post";
 
 // for the mutation what we do is we pass an object & in the mutation we specify the arguments that we want to be passed to this mutation in order to create a new subreddit as well as the handler which is the function which will then go and be excuted when we call this mutation. This way we will be able to call function directly from our frontend, which will handle creatiung a new subreddit for us.
 export const create = mutation({
@@ -36,6 +37,12 @@ export const getSubreddit = query({
     if (!subreddit) {
       return null;
     }
-    return subreddit;
+    const posts = await ctx.db
+      .query("post")
+      .withIndex("bySubreddit", (q) => q.eq("subreddit", subreddit._id))
+      .collect();
+
+    const enrichedPosts = await getEnrichedPosts(ctx, posts);
+    return { ...subreddit, posts: enrichedPosts };
   },
 });

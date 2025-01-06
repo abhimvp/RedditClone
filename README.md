@@ -118,3 +118,5 @@ It will also create a convex/ folder for you to write your backend API functions
 #### displaying posts
 
 - this is going to be a lot , patience here.
+
+#### viewing subreddits
