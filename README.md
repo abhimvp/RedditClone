@@ -98,3 +98,8 @@ It will also create a convex/ folder for you to write your backend API functions
 
 - now we want to display a subreddit . so let's write the subreddit display page that when we go to the subreddit , we can see the description ..etc and the subreddit creation is working.
 - it's working , go to [localhost](http://localhost:5173/r/programming) and see
+
+### Creating posts(backend) & post creation form(frontend)
+
+- same as above we begin with schema , define the posts table and what fields it needs and create mutations and query to add and display posts info in a subreddit.
+- frontend : submitPage - done can see the data in databse.

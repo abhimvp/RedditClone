@@ -13,4 +13,13 @@ export default defineSchema({
     description: v.optional(v.string()),
     authorId: v.id("users"),
   }),
+  post: defineTable({
+    subject: v.string(),
+    body: v.string(),
+    authorId: v.id("users"),
+    subreddit: v.id("subreddit"),
+    image: v.optional(v.id("_storage")),
+  })
+    .index("bySubreddit", ["subreddit"])
+    .index("byAuthor", ["authorId"]),
 });
