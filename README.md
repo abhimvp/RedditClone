@@ -67,3 +67,9 @@ It will also create a convex/ folder for you to write your backend API functions
 - create a new folder in frontend `pages` & `components` & `styles`.
 - Added all of the css files from techwithtime git repo.To save time.But will explore later.(TODO)
 - we have base pages setup done.
+- `and start working on navigation. for this we need some kind of nav bar.` here also we stub it , means stab(bing) writing the skeleton of the component but we're not actually implementing it yet.
+- Layout component is just going to handle rendering the navbar for us & the rest of the layout of our site. Outlet - Renders the matching child route of a parent route or nothing if no child route matches - just renders a page - it's just saying whatever page run , we're going to render that inside of here . so we will be using this layout component from our app component where we have the main navigation setup.
+- we will be setting up navigation in APP.TSX using react-router-dom.we will always be rending the Layout and we render all other pages inside of layout route.
+- upto here Navigation is working.
+
+- next writing the authentication components and completing the nav bar.

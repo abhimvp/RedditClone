@@ -1,34 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
+import Layout from "./components/Layout";
+import HomePage from "./pages/HomePage";
+import PostPage from "./pages/PostPage";
+import ProfilePage from "./pages/ProfilePage";
+import SubredditPage from "./pages/SubredditPage";
+import SubmitPage from "./pages/SubmitPage";
+import "./styles/App.css";
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} /> // index here allows the homepage to be default to go to.
+          <Route path="post/:postId" element={<PostPage />} /> // : colon specifies a variable in the url
+          <Route path="u/:username" element={<ProfilePage />} />
+          <Route path="r/:subredditName" element={<SubredditPage />} />
+          <Route path="r/:subredditName/submit" element={<SubmitPage />} />
+          <Route path="*" element={<Navigate to="/" replace/>} /> // if we go to some page that's not defined above then it redirects to homepage by replacing us to whatever page we're on
+        </Route>
+      </Routes>
+      
+    </BrowserRouter>
   )
 }
 
