@@ -84,3 +84,12 @@ It will also create a convex/ folder for you to write your backend API functions
 - next allow users to create a subreddit. using the Faplus logo.
 - create a dropdown & we also need to have components that we're goinng to render when we press the buttion in the drop down.
 - now first we created the commnuity modal and now to see that we create the dropdown component.
+
+### Creating subreddits
+
+- now on backend , we go to schemas and define the type that we want to have for our subreddit and the fields that we want to have on that.
+- By the way in convex it's automatically going to insert an ID as well as the created at time.Any time you make a new instance of like a user or a subreddit or whatever.so we don't have to specify those fields ourselves.
+- Now remember that in convex we have three main operations that we can use - queries (get some info and display it on frontend ), mutations (create or delete or modify something in database ), action ( used to call some third party service) - Here we need mutations and queries .
+  - so we need to now write a mutation in order to create a new subreddit.It's good practice to create a file on the name of table we deal with mutations or queries.
+  - now we created the create mutation to create new subreddit and now how do we call this from frontend.?
+    - we go to create community modal and we use the imports in there to have a function on our frontend that triggers or links back to that mutation.

@@ -16,11 +16,39 @@ const CreateCommunityModal = ({
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
   const [isLoading, SetIsLoading] = useState(false);
+  const createSubreddit = useMutation(api.subreddit.create);
 
   if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
+    if (!name) {
+      setError("Community name is required");
+      return;
+    }
+    if (name.length < 3 || name.length > 21) {
+      setError("Community name must be betweem 3 and 21 characters");
+      return;
+    }
+    // RegExp.test(string: string): boolean
+    // Returns a Boolean value that indicates whether or not a pattern exists in a searched string.
+    if (!/^[a-zA-Z0-9]+/.test(name)) {
+      setError("Community name must only contain letters and numbers");
+    }
+
+    SetIsLoading(true);
+    await createSubreddit({ name, description })
+      .then((result) => {
+        console.log(result);
+        onClose();
+      })
+      .catch((err) => {
+        setError(`Failed to create community. ${err.data.message}`);
+      })
+      .finally(() => {
+        SetIsLoading(false);
+      });
   };
   return (
     <>
