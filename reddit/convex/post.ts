@@ -116,9 +116,9 @@ export const userPosts = query({
 
 // delete post
 export const deletePost = mutation({
-  args: { postId: v.id("post") },
+  args: { id: v.id("post") },
   handler: async (ctx, args) => {
-    const post = await ctx.db.get(args.postId);
+    const post = await ctx.db.get(args.id);
     if (!post) {
       throw new ConvexError(ERROR_MESSAGES.POST_NOT_FOUND);
     }
@@ -126,6 +126,6 @@ export const deletePost = mutation({
     if (post.authorId !== user._id) {
       throw new ConvexError(ERROR_MESSAGES.UNAUTHORIZED_DELETE);
     }
-    await ctx.db.delete(args.postId);
+    await ctx.db.delete(args.id);
   },
 });

@@ -122,3 +122,5 @@ It will also create a convex/ folder for you to write your backend API functions
 #### viewing subreddits
 
 #### viewing user posts
+
+#### deleting posts

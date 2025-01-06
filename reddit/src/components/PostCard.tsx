@@ -125,8 +125,17 @@ const PostCard = ({
   const navigate = useNavigate();
   const ownedByCurrentUser = post.author?.username === user?.username;
 
+  const deletePost = useMutation(api.post.deletePost);
+
   const handleComment = () => {};
-  const handleDelete = () => {};
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      await deletePost({ id: post._id });
+      if (expandedView) {
+        navigate("/");
+      }
+    }
+  };
   const handleSubmitComment = (content: string) => {};
 
   return (
