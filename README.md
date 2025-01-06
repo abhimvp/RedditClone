@@ -78,3 +78,9 @@ It will also create a convex/ folder for you to write your backend API functions
 - also let's go to clerk to allow us to create username as well.
 - created a account on my name abhimvp and it's cool.
 - if we want to see if the users are getting added to convex databse , we go to convex dashboard > Data > we see users table and the user created data.
+
+### Subreddit creation form.
+
+- next allow users to create a subreddit. using the Faplus logo.
+- create a dropdown & we also need to have components that we're goinng to render when we press the buttion in the drop down.
+- now first we created the commnuity modal and now to see that we create the dropdown component.

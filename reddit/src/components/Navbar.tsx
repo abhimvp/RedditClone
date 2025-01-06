@@ -7,9 +7,11 @@ import {
   useUser,
 } from "@clerk/clerk-react";
 import { Authenticated, Unauthenticated } from "convex/react";
+import CreateDropdown from "./CreateDropDown";
 import { useState } from "react";
 import "../styles/Navbar.css";
 const Navbar = () => {
+  const [showDropDown, setShowDropDown] = useState(false);
   // Returns the current auth state and if a user is signed in, the user object.if they are signed in it gives info about their mail , name and anything clerk storing for us.
   const { user } = useUser();
   const navigate = useNavigate();
@@ -31,10 +33,18 @@ const Navbar = () => {
           </Unauthenticated>
           <Authenticated>
             <div className="dropdown-container">
-              <button className="icon-button" onClick={() => {}}>
-                {/* {"drop down container "} */}
+              <button
+                className="icon-button"
+                onClick={() => setShowDropDown(true)}
+              >
                 <FaPlus />
               </button>
+              {showDropDown && (
+                <CreateDropdown
+                  isOpen={showDropDown}
+                  onClose={() => setShowDropDown(false)}
+                />
+              )}
             </div>
             <button
               className="icon-button"
