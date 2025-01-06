@@ -72,4 +72,9 @@ It will also create a convex/ folder for you to write your backend API functions
 - we will be setting up navigation in APP.TSX using react-router-dom.we will always be rending the Layout and we render all other pages inside of layout route.
 - upto here Navigation is working.
 
+### Navigation Bar
+
 - next writing the authentication components and completing the nav bar.
+- also let's go to clerk to allow us to create username as well.
+- created a account on my name abhimvp and it's cool.
+- if we want to see if the users are getting added to convex databse , we go to convex dashboard > Data > we see users table and the user created data.
