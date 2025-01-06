@@ -93,3 +93,8 @@ It will also create a convex/ folder for you to write your backend API functions
   - so we need to now write a mutation in order to create a new subreddit.It's good practice to create a file on the name of table we deal with mutations or queries.
   - now we created the create mutation to create new subreddit and now how do we call this from frontend.?
     - we go to create community modal and we use the imports in there to have a function on our frontend that triggers or links back to that mutation.
+
+### viewing subreddits
+
+- now we want to display a subreddit . so let's write the subreddit display page that when we go to the subreddit , we can see the description ..etc and the subreddit creation is working.
+- it's working , go to [localhost](http://localhost:5173/r/programming) and see
