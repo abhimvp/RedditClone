@@ -114,3 +114,7 @@ It will also create a convex/ folder for you to write your backend API functions
 #### Fetching / Getting Posts
 
 - now if we look at the post schema , we're just containing like reference to the ID's to the other tables.so what we're going to be doing is we're going to be looking at the subreddit id & we actually go to subreddit table , grab the name of the subreddit and then include that information that we returned back about the post.
+
+#### displaying posts
+
+- this is going to be a lot , patience here.
