@@ -1,0 +1,10 @@
+import "../styles/SubmitPage.css";
+
+const SubmitPage = () => {
+    return (
+        <div>
+            <h1>Submit Page</h1>
+        </div>
+    )
+}
+export default SubmitPage;

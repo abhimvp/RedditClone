@@ -62,3 +62,8 @@ It will also create a convex/ folder for you to write your backend API functions
 - follow https://docs.convex.dev/auth/database-auth#set-up-webhooks Then https://docs.convex.dev/auth/database-auth#mutations-for-upserting-and-deleting-users - create a users.ts in convex directory and this will contain mutations (Mutations for upserting and deleting users) are what can be called to actually modify data in the convex database that will be used in order to will update the user from clerk. and create http.ts file and copy the code from this part https://docs.convex.dev/auth/database-auth#webhook-endpoint-implementation - we can basically read through docs to understand the code later.
 
 ## setting up pages and navigation
+
+- we want to have `home page` , we're going to have a page to view a post , to view a user's profile , to submit a new post , a page for viewing subreddits.
+- create a new folder in frontend `pages` & `components` & `styles`.
+- Added all of the css files from techwithtime git repo.To save time.But will explore later.(TODO)
+- we have base pages setup done.
