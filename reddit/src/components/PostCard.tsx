@@ -181,6 +181,8 @@ const PostCard = ({
 
   const comments = useQuery(api.comments.getComments, { postId: post._id });
 
+  const commentCount = useQuery(api.comments.getCommentCount, { postId: post._id })
+
   const handleComment = () => {
     if (!expandedView) {
       navigate(`/post/${post._id}`);
@@ -218,7 +220,7 @@ const PostCard = ({
         <div className="post-actions">
           <button className="action-button" onClick={handleComment}>
             <FaRegCommentAlt />
-            <span>0 Comments</span>
+            <span>{commentCount ?? 0} Comments</span>
           </button>
           {ownedByCurrentUser && (
             <button

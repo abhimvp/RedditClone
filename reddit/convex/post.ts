@@ -2,6 +2,7 @@ import { mutation, query, QueryCtx } from "./_generated/server";
 import { v, ConvexError } from "convex/values";
 import { getCurrentUserOrThrow } from "./users";
 import { Doc, Id } from "./_generated/dataModel";
+import { counts,postCountKey } from "./counter";
 // Omit - Construct a type with the properties of T except for those in type K.
 // Taking all of the properties from post and removing the ones that are from subreddit, then adding in the specific ones that i want
 type EnrichedPost = Omit<Doc<"post">, "subreddit"> & {
@@ -38,6 +39,7 @@ export const create = mutation({
       subreddit,
       image: storageId || undefined,
     });
+    await counts.inc(ctx,postCountKey(user._id))
     return postId;
   },
 });
@@ -126,6 +128,9 @@ export const deletePost = mutation({
     if (post.authorId !== user._id) {
       throw new ConvexError(ERROR_MESSAGES.UNAUTHORIZED_DELETE);
     }
+    await counts.dec(ctx,postCountKey(user._id))
     await ctx.db.delete(args.id);
   },
 });
+
+

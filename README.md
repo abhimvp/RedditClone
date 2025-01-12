@@ -130,3 +130,8 @@ It will also create a convex/ folder for you to write your backend API functions
 - go to schema.ts & create a new table for defining the comments , convex has built in pagination features , which isn't being covered in here for now. we want to use pagination when there is lot of comments in a post or lot of posts in a subreddit as well.
 
 #### Shareded Counting (Posts & Comments )
+
+- start setting up some counts to keep track of how many comments we have on a post or how many comments a user made in general , how many posts a user has , we have all of these different counts . no how do we do this efficiently ? -> now we use `sharded counter` which is provided by convex. That allows us to very easily keep track of these kind of large number counts , especially in something like a social media site like we're building here.
+- Go to https://www.convex.dev/components - where we have bunch of different components that we can use for our backend & we will be looking at [sharded counter](https://www.convex.dev/components/sharded-counter) - This component adds counters to Convex. It acts as a key-value store from string to number, with sharding to increase throughput when updating values.
+- DO `npm install @convex-dev/sharded-counter` - follow initial steps from docs to build this feature.
+- for now we use this counter for comments , later we will use this for upvote and downvote as well.
