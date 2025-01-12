@@ -15,6 +15,7 @@ import type * as image from "../image.js";
 import type * as post from "../post.js";
 import type * as subreddit from "../subreddit.js";
 import type * as users from "../users.js";
+import type * as vote from "../vote.js";
 
 import type {
   ApiFromModules,
@@ -37,6 +38,7 @@ declare const fullApi: ApiFromModules<{
   post: typeof post;
   subreddit: typeof subreddit;
   users: typeof users;
+  vote: typeof vote;
 }>;
 declare const fullApiWithMounts: typeof fullApi;
 

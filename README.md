@@ -135,3 +135,5 @@ It will also create a convex/ folder for you to write your backend API functions
 - Go to https://www.convex.dev/components - where we have bunch of different components that we can use for our backend & we will be looking at [sharded counter](https://www.convex.dev/components/sharded-counter) - This component adds counters to Convex. It acts as a key-value store from string to number, with sharding to increase throughput when updating values.
 - DO `npm install @convex-dev/sharded-counter` - follow initial steps from docs to build this feature.
 - for now we use this counter for comments , later we will use this for upvote and downvote as well.
+
+#### Voting - Upvotes & DownVotes
