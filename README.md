@@ -124,3 +124,9 @@ It will also create a convex/ folder for you to write your backend API functions
 #### viewing user posts
 
 #### deleting posts
+
+#### handle comments - posting , viewing , deleting comments
+
+- go to schema.ts & create a new table for defining the comments , convex has built in pagination features , which isn't being covered in here for now. we want to use pagination when there is lot of comments in a post or lot of posts in a subreddit as well.
+
+#### Shareded Counting (Posts & Comments )

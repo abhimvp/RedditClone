@@ -4,9 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Id } from "../../convex/_generated/dataModel";
-import { useUser } from "@clerk/clerk-react";
+import { SignedIn, useUser } from "@clerk/clerk-react";
 import "../styles/PostCard.css";
-import { useState } from "react";
+import React, { useState } from "react";
+import Comment from "./Comment";
 
 // write few different interfaces for displaying our various components.
 // also split these components into subcomponents
@@ -43,6 +44,13 @@ interface PostContentProps {
   body?: string;
   image?: string;
   expandedView: boolean;
+}
+
+interface CommentSectionProps {
+  postId: Id<"post">;
+  comments: any[];
+  onSubmit: (content: string) => void;
+  signedIn: boolean;
 }
 
 // header of the post
@@ -114,6 +122,48 @@ const PostContent = ({
   );
 };
 
+const CommentSection = ({
+  comments,
+  onSubmit,
+  signedIn,
+}: CommentSectionProps) => {
+  const [newComment, setNewComment] = useState("");
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newComment.trim()) return;
+    onSubmit(newComment.trim());
+    setNewComment("");
+  };
+
+  return (
+    <div className="comments-section">
+      {signedIn && (
+        <form className="comment-form">
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="What are your thoughts?"
+            className="comment-input"
+          />
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className="comment-submit"
+            disabled={!newComment}
+          >
+            Comment
+          </button>
+        </form>
+      )}
+      <div className="comments-list">
+        {comments?.map((comment) => (
+          <Comment key={comment._id} comment={comment} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 // post card = postheader + post content
 const PostCard = ({
   post,
@@ -127,7 +177,17 @@ const PostCard = ({
 
   const deletePost = useMutation(api.post.deletePost);
 
-  const handleComment = () => {};
+  const createComment = useMutation(api.comments.create);
+
+  const comments = useQuery(api.comments.getComments, { postId: post._id });
+
+  const handleComment = () => {
+    if (!expandedView) {
+      navigate(`/post/${post._id}`);
+    } else {
+      setShowComments(!showComments);
+    }
+  };
   const handleDelete = async () => {
     if (window.confirm("Are you sure you want to delete this post?")) {
       await deletePost({ id: post._id });
@@ -136,7 +196,9 @@ const PostCard = ({
       }
     }
   };
-  const handleSubmitComment = (content: string) => {};
+  const handleSubmitComment = (content: string) => {
+    createComment({ content, postId: post._id });
+  };
 
   return (
     <div className={`post-card ${expandedView ? "expanded" : ""}`}>
@@ -168,6 +230,14 @@ const PostCard = ({
             </button>
           )}
         </div>
+        {(showComments || expandedView) && (
+          <CommentSection
+            postId={post._id}
+            comments={comments ?? []}
+            onSubmit={handleSubmitComment}
+            signedIn={!!user}
+          />
+        )}
       </div>
     </div>
   );
