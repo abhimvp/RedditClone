@@ -12,7 +12,7 @@ export default defineSchema({
     name: v.string(),
     description: v.optional(v.string()),
     authorId: v.id("users"),
-  }),
+  }).searchIndex("search_body", { searchField: "name" }),
   post: defineTable({
     subject: v.string(),
     body: v.string(),
@@ -20,6 +20,10 @@ export default defineSchema({
     subreddit: v.id("subreddit"),
     image: v.optional(v.id("_storage")),
   })
+    .searchIndex("search_body", {
+      searchField: "subject",
+      filterFields: ["subreddit"],
+    })
     .index("bySubreddit", ["subreddit"])
     .index("byAuthor", ["authorId"]),
   comments: defineTable({

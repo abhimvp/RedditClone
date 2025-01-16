@@ -2,7 +2,7 @@ import { mutation, query, QueryCtx } from "./_generated/server";
 import { v, ConvexError } from "convex/values";
 import { getCurrentUserOrThrow } from "./users";
 import { Doc, Id } from "./_generated/dataModel";
-import { counts,postCountKey } from "./counter";
+import { counts, postCountKey } from "./counter";
 // Omit - Construct a type with the properties of T except for those in type K.
 // Taking all of the properties from post and removing the ones that are from subreddit, then adding in the specific ones that i want
 type EnrichedPost = Omit<Doc<"post">, "subreddit"> & {
@@ -39,7 +39,7 @@ export const create = mutation({
       subreddit,
       image: storageId || undefined,
     });
-    await counts.inc(ctx,postCountKey(user._id))
+    await counts.inc(ctx, postCountKey(user._id));
     return postId;
   },
 });
@@ -128,9 +128,35 @@ export const deletePost = mutation({
     if (post.authorId !== user._id) {
       throw new ConvexError(ERROR_MESSAGES.UNAUTHORIZED_DELETE);
     }
-    await counts.dec(ctx,postCountKey(user._id))
+    await counts.dec(ctx, postCountKey(user._id));
     await ctx.db.delete(args.id);
   },
 });
 
+export const search = query({
+  args: { queryStr: v.string(), subreddit: v.string() },
+  handler: async (ctx, args) => {
+    if (!args.queryStr) return [];
 
+    const subredditObj = await ctx.db
+      .query("subreddit")
+      .filter((q) => q.eq(q.field("name"), args.subreddit))
+      .unique();
+
+    if (!subredditObj) return [];
+
+    const posts = await ctx.db
+      .query("post")
+      .withSearchIndex("search_body", (q) =>
+        q.search("subject", args.queryStr).eq("subreddit", subredditObj._id)
+      )
+      .take(10);
+
+    return posts.map((post) => ({
+      _id: post._id,
+      title: post.subject,
+      type: "post",
+      name: subredditObj.name,
+    }));
+  },
+});

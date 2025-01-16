@@ -46,3 +46,19 @@ export const getSubreddit = query({
     return { ...subreddit, posts: enrichedPosts };
   },
 });
+
+export const search = query({
+  args: { queryStr: v.string() },
+  handler: async (ctx, args) => {
+    if (!args.queryStr) return [];
+
+    const subreddits = await ctx.db
+      .query("subreddit")
+      .withSearchIndex("search_body", (q) => q.search("name", args.queryStr))
+      .take(10);
+
+    return subreddits.map((sub) => {
+      return { ...sub, type: "community", title: sub.name };
+    });
+  },
+});

@@ -25,7 +25,7 @@ const Navbar = () => {
             <span className="site-name">Reddit</span>
           </div>
         </Link>
-        <SearchBar/>
+        <SearchBar />
         <div className="nav-actions">
           <Unauthenticated>
             <SignInButton mode="modal">
