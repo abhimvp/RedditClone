@@ -137,3 +137,7 @@ It will also create a convex/ folder for you to write your backend API functions
 - for now we use this counter for comments , later we will use this for upvote and downvote as well.
 
 #### Voting - Upvotes & DownVotes
+
+#### SearchBar component - Frontend
+
+- The last thing to do is add the ability to search, because we need to be able to search for subreddits and things like post , we will see how to do that.Let's build the search bar component.

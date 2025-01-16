@@ -10,6 +10,7 @@ import { Authenticated, Unauthenticated } from "convex/react";
 import CreateDropdown from "./CreateDropDown";
 import { useState } from "react";
 import "../styles/Navbar.css";
+import SearchBar from "./SearchBar";
 const Navbar = () => {
   const [showDropDown, setShowDropDown] = useState(false);
   // Returns the current auth state and if a user is signed in, the user object.if they are signed in it gives info about their mail , name and anything clerk storing for us.
@@ -24,7 +25,7 @@ const Navbar = () => {
             <span className="site-name">Reddit</span>
           </div>
         </Link>
-        <div>Searchbar</div>
+        <SearchBar/>
         <div className="nav-actions">
           <Unauthenticated>
             <SignInButton mode="modal">
