@@ -1,10 +1,11 @@
+import { Feed } from "../components/Feed";
+
 const HomePage = () => {
-    return (
-        <div>
-            <h1>Home Page</h1>
-            <p>Home Page Content</p>
-        </div>
-    )
-}
+  return (
+    <div className="content-container">
+      <Feed />
+    </div>
+  );
+};
 
 export default HomePage;

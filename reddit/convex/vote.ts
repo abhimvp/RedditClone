@@ -6,7 +6,7 @@ import { counts } from "./counter";
 
 type VoteType = "upvote" | "downvote";
 
-function voteKey(postId: string, voteType: VoteType): string {
+export function voteKey(postId: string, voteType: VoteType): string {
   return `${voteType}:${postId}`;
 }
 // return a mutatioon not create a mutation

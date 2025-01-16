@@ -145,3 +145,7 @@ It will also create a convex/ folder for you to write your backend API functions
 #### SearchBar component - Backend - Searching for subreddits
 
 - In order to perform a search we're gonna have to go back to our backend - convex - we're going to add a search index to the tables that we want to be able to search.(Subreddit,Post)(convex supports full text search)
+
+#### Feed/Leaderboard
+
+- To display top posts in last 24 hours or top voted posts
